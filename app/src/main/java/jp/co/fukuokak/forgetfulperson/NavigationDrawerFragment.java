@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -93,18 +96,85 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
+//        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+//                getActionBar().getThemedContext(),
+//                android.R.layout.simple_list_item_activated_1,
+//                android.R.id.text1,
+//                new String[]{
+//                      getString(R.string.title_section1),
+//                        getString(R.string.title_section2),
+//                        getString(R.string.title_section3),
+//                }));
+        mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
+                .getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                new String[]{
-                      getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                }));
+                android.R.id.text1, setNavigationList()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
+
+    public String[] setNavigationList() {
+        Calendar calendar = Calendar.getInstance();
+        String[] weekdayList = new String[10];
+        Integer month = calendar.get(Calendar.MONTH) +1 ;
+        Integer date = calendar.get(Calendar.DATE) ;
+        Integer loopCount = 7;
+
+        weekdayList[0] = getString(R.string.today) + "(" + month.toString() + "/"
+                + date.toString()+")";
+        for (int i = 1; i <= loopCount; i++) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            Log.d("setNavigationList", calendar.toString());
+            weekdayList[i] = getWeekDay(calendar);
+        }
+
+        weekdayList[8] = getString(R.string.analysis);
+        weekdayList[9] = getString(R.string.stocktaking);
+
+        return weekdayList;
+    }
+    public String getWeekDay(Calendar weekday) {
+
+        Integer month = weekday.get(Calendar.MONTH) +1 ;
+        Integer date = weekday.get(Calendar.DATE) ;
+
+        String today = month.toString() + "/"
+                + date.toString();
+
+        switch (weekday.get(Calendar.DAY_OF_WEEK)) {
+            case Calendar.SUNDAY:
+                today = today + "(" + getString(R.string.sun) + ")";
+                break;
+
+            case Calendar.MONDAY:
+                today = today + "(" + getString(R.string.mon) + ")";
+                break;
+
+            case Calendar.TUESDAY:
+                today = today + "(" + getString(R.string.tue) + ")";
+                break;
+
+            case Calendar.WEDNESDAY:
+                today = today + "(" + getString(R.string.wed) + ")";
+                break;
+
+            case Calendar.THURSDAY:
+                today = today + "(" + getString(R.string.thu) + ")";
+                break;
+
+            case Calendar.FRIDAY:
+                today = today + "(" + getString(R.string.fri) + ")";
+                break;
+
+            case Calendar.SATURDAY:
+                today = today + "(" + getString(R.string.sat) + ")";
+                break;
+
+        }
+
+        return today;
+    }
+
 
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
