@@ -33,12 +33,15 @@ public class CommonUtilities extends Activity {
             Toast.makeText(context, Message, Toast.LENGTH_SHORT).show();
             Log.d(tags, Message);
         } else {
+            //No funtion is OK
+            Log.v(tags, Message);
         }
     }
 
     public String printString(String print){
         return print ;
     }
+
     public void saveWeeklyRecord(String filename) {
         OutputStream out = null;
         try {
