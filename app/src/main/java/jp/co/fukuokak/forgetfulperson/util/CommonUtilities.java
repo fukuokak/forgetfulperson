@@ -10,17 +10,15 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 public class CommonUtilities extends Activity {
-
+    private boolean debugTrue = Boolean.TRUE ;
+    private boolean debugFalse = Boolean.FALSE ;
     private Context context = null;
-    private Boolean debugFlag = true;
+    private Boolean debugFlag = debugTrue;
 
     public CommonUtilities() {
-    }
-
-    public CommonUtilities(Context context) {
-        this.context = context;
     }
 
     public CommonUtilities(Context context, Boolean debugFlag) {
@@ -29,11 +27,10 @@ public class CommonUtilities extends Activity {
     }
 
     public void debugToast(String tags, String Message) {
-        if (debugFlag == true) {
+        if (debugFlag == debugTrue) {
             Toast.makeText(context, Message, Toast.LENGTH_SHORT).show();
             Log.d(tags, Message);
         } else {
-            //No funtion is OK
             Log.v(tags, Message);
         }
     }
@@ -43,17 +40,18 @@ public class CommonUtilities extends Activity {
     }
 
     public void saveWeeklyRecord(String filename) {
-        OutputStream out = null;
+        OutputStream out;
         try {
             out = openFileOutput(filename, MODE_PRIVATE);
+            //noinspection UnusedAssignment
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(out, "UTF-8"));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            debugToast(getClass().getMethods().toString(), e.getMessage().toString());
+            debugToast(Arrays.toString(getClass().getMethods()), e.getMessage());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            debugToast(getClass().getMethods().toString(), e.getMessage().toString());
+            debugToast(Arrays.toString(getClass().getMethods()), e.getMessage());
         }
     }
 
