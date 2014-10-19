@@ -10,8 +10,7 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
 
-
-    <!-- Slide Navigation Tiltes & FLAGS-->
+    <!-- Slide Navigation Tiltes & FLAGS -->
 
     <string name="today">Today</string>
     <string name="mon">Monday</string>
@@ -36,5 +35,7 @@
     <string name="sun_title">Next Sunday Schedules</string>
     <string name="analysis_title">Analysis Your History</string>
     <string name="stocktaking_title">StockTaking Your Today</string>
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
