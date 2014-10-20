@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,9 +25,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import jp.co.fukuokak.forgetfulperson.listener.LeftDrawerItemLickListener;
+import jp.co.fukuokak.forgetfulperson.listener.LeftDrawerItemClickListener;
 import jp.co.fukuokak.forgetfulperson.model.CalendarValue;
-import jp.co.fukuokak.forgetfulperson.util.ScreenInformationGenerator;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -111,16 +109,16 @@ public class NavigationDrawerFragment extends Fragment {
 //                        getString(R.string.title_section3),
 //                }));
 
-        //ここを消すと動作する
         Calendar calendar = Calendar.getInstance();
-        ArrayList<CalendarValue> calmap = setCalendarValueList(calendar);
+        ArrayList<CalendarValue> cvArray = setCalendarValueList(calendar);
+        String[] selectItem = getSelectItemList(cvArray);
 
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1, setNavigationList()));
+                android.R.id.text1, selectItem));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        mDrawerListView.setOnItemClickListener(new LeftDrawerItemLickListener());
+        mDrawerListView.setOnItemClickListener(new LeftDrawerItemClickListener(getActivity() , cvArray));
         return mDrawerListView;
     }
 
@@ -136,67 +134,75 @@ public class NavigationDrawerFragment extends Fragment {
         return calendarList;
     }
 
-    public String[] setNavigationList() {
-        Calendar calendar = Calendar.getInstance();
-        String[] weekdayList = new String[10];
-        Integer month = calendar.get(Calendar.MONTH) +1 ;
-        Integer date = calendar.get(Calendar.DATE) ;
-        Integer loopCount = 7;
-
-        weekdayList[0] = getString(R.string.today) + "(" + month.toString() + "/"
-                + date.toString()+")";
-        for (int i = 1; i <= loopCount; i++) {
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
-            Log.d("setNavigationList", calendar.toString());
-            weekdayList[i] = getWeekDay(calendar);
+    public String[] getSelectItemList(ArrayList<CalendarValue> cvArray){
+        String[] selectItem = new String[cvArray.size()];
+        for(int i = 0 ; i < cvArray.size() ; i++){
+            selectItem[i] = cvArray.get(i).getListText();
         }
-
-        weekdayList[8] = getString(R.string.analysis);
-        weekdayList[9] = getString(R.string.stocktaking);
-
-        return weekdayList;
+        return selectItem;
     }
-    public String getWeekDay(Calendar weekday) {
-
-        Integer month = weekday.get(Calendar.MONTH) +1 ;
-        Integer date = weekday.get(Calendar.DATE) ;
-
-        String today = month.toString() + "/"
-                + date.toString();
-
-        switch (weekday.get(Calendar.DAY_OF_WEEK)) {
-            case Calendar.SUNDAY:
-                today = today + "(" + getString(R.string.sun) + ")";
-                break;
-
-            case Calendar.MONDAY:
-                today = today + "(" + getString(R.string.mon) + ")";
-                break;
-
-            case Calendar.TUESDAY:
-                today = today + "(" + getString(R.string.tue) + ")";
-                break;
-
-            case Calendar.WEDNESDAY:
-                today = today + "(" + getString(R.string.wed) + ")";
-                break;
-
-            case Calendar.THURSDAY:
-                today = today + "(" + getString(R.string.thu) + ")";
-                break;
-
-            case Calendar.FRIDAY:
-                today = today + "(" + getString(R.string.fri) + ")";
-                break;
-
-            case Calendar.SATURDAY:
-                today = today + "(" + getString(R.string.sat) + ")";
-                break;
-
-        }
-
-        return today;
-    }
+//
+//    public String[] setNavigationList() {
+//        Calendar calendar = Calendar.getInstance();
+//        String[] weekdayList = new String[10];
+//        Integer month = calendar.get(Calendar.MONTH) +1 ;
+//        Integer date = calendar.get(Calendar.DATE) ;
+//        Integer loopCount = 7;
+//
+//        weekdayList[0] = getString(R.string.today) + "(" + month.toString() + "/"
+//                + date.toString()+")";
+//        for (int i = 1; i <= loopCount; i++) {
+//            calendar.add(Calendar.DAY_OF_MONTH, 1);
+//            Log.d("setNavigationList", calendar.toString());
+//            weekdayList[i] = getWeekDay(calendar);
+//        }
+//
+//        weekdayList[8] = getString(R.string.analysis);
+//        weekdayList[9] = getString(R.string.stocktaking);
+//
+//        return weekdayList;
+//    }
+//    public String getWeekDay(Calendar weekday) {
+//
+//        Integer month = weekday.get(Calendar.MONTH) +1 ;
+//        Integer date = weekday.get(Calendar.DATE) ;
+//
+//        String today = month.toString() + "/"
+//                + date.toString();
+//
+//        switch (weekday.get(Calendar.DAY_OF_WEEK)) {
+//            case Calendar.SUNDAY:
+//                today = today + "(" + getString(R.string.sun) + ")";
+//                break;
+//
+//            case Calendar.MONDAY:
+//                today = today + "(" + getString(R.string.mon) + ")";
+//                break;
+//
+//            case Calendar.TUESDAY:
+//                today = today + "(" + getString(R.string.tue) + ")";
+//                break;
+//
+//            case Calendar.WEDNESDAY:
+//                today = today + "(" + getString(R.string.wed) + ")";
+//                break;
+//
+//            case Calendar.THURSDAY:
+//                today = today + "(" + getString(R.string.thu) + ")";
+//                break;
+//
+//            case Calendar.FRIDAY:
+//                today = today + "(" + getString(R.string.fri) + ")";
+//                break;
+//
+//            case Calendar.SATURDAY:
+//                today = today + "(" + getString(R.string.sat) + ")";
+//                break;
+//
+//        }
+//
+//        return today;
+//    }
 
 
     public boolean isDrawerOpen() {

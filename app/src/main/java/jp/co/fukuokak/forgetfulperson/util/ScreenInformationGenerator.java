@@ -12,7 +12,7 @@ public class ScreenInformationGenerator extends Activity {
     private Integer screenNo = null;
     private String screenName = "";
     private String tTitle = "";
-    private CommonUtilities comUtil = new CommonUtilities();
+    private CommonUtilities comUtil = new CommonUtilities(getApplicationContext());
 
     public String getScreenName() {
         return screenName;

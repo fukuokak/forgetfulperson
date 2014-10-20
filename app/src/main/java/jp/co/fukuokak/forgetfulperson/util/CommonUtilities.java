@@ -18,12 +18,8 @@ public class CommonUtilities extends Activity {
     private Context context = null;
     private Boolean debugFlag = debugTrue;
 
-    public CommonUtilities() {
-    }
-
-    public CommonUtilities(Context context, Boolean debugFlag) {
+    public CommonUtilities(Context context) {
         this.context = context;
-        this.debugFlag = debugFlag;
     }
 
     public void debugToast(String tags, String Message) {
