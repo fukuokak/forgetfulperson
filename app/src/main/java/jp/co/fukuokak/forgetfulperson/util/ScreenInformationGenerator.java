@@ -12,6 +12,7 @@ public class ScreenInformationGenerator extends Activity {
     private Integer screenNo = null;
     private String screenName = "";
     private String tTitle = "";
+    private CommonUtilities comUtil = new CommonUtilities();
 
     public String getScreenName() {
         return screenName;
@@ -48,7 +49,6 @@ public class ScreenInformationGenerator extends Activity {
                 + date.toString() + ")");
         for (int i = 1; i <= loopCount; i++) {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
-            Log.d("setNavigationList", calendar.toString());
             weekdayList.add(getWeekDay(calendar));
         }
         return weekdayList;
@@ -96,7 +96,6 @@ public class ScreenInformationGenerator extends Activity {
         return today;
     }
 
-//
 //    public ScreenInformationGenerator screenInformationSelector(Integer num) {
 //        String menuFlag = "";
 //        switch (num) {

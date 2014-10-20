@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-
 public class TopFrameActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -25,7 +24,7 @@ public class TopFrameActivity extends Activity
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
-    private CharSequence mTitle;
+    private CharSequence mTitle = null ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +34,12 @@ public class TopFrameActivity extends Activity
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
-        mTitle = "Forgetful Person";
+
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
     }
 
     @Override
@@ -52,17 +52,7 @@ public class TopFrameActivity extends Activity
     }
 
     public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }
+        mTitle = getString(R.string.app_name);
     }
 
     public void restoreActionBar() {
@@ -125,7 +115,7 @@ public class TopFrameActivity extends Activity
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_left_slide_nabigation, container, false);
             return rootView;
         }

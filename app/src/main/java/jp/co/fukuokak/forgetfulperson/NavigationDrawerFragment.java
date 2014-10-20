@@ -23,7 +23,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+
+import jp.co.fukuokak.forgetfulperson.listener.LeftDrawerItemLickListener;
+import jp.co.fukuokak.forgetfulperson.model.CalendarValue;
+import jp.co.fukuokak.forgetfulperson.util.ScreenInformationGenerator;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -105,12 +110,30 @@ public class NavigationDrawerFragment extends Fragment {
 //                        getString(R.string.title_section2),
 //                        getString(R.string.title_section3),
 //                }));
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
-                .getThemedContext(),
+
+        //ここを消すと動作する
+        Calendar calendar = Calendar.getInstance();
+        ArrayList<CalendarValue> calmap = setCalendarValueList(calendar);
+
+        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+                getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1, setNavigationList()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+        mDrawerListView.setOnItemClickListener(new LeftDrawerItemLickListener());
         return mDrawerListView;
+    }
+
+    public ArrayList<CalendarValue> setCalendarValueList(Calendar calendar){
+
+        Integer loopCount = 7 ;
+        ArrayList<CalendarValue> calendarList = new ArrayList<CalendarValue>();
+        for (int i = 0; i <= loopCount; i++) {
+            CalendarValue cv = new CalendarValue(calendar);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            calendarList.add(cv);
+        }
+        return calendarList;
     }
 
     public String[] setNavigationList() {
