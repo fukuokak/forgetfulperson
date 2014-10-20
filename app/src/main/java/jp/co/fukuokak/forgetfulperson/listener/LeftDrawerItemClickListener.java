@@ -14,7 +14,7 @@ import jp.co.fukuokak.forgetfulperson.ToDoListFragment;
 /**
  * Created by fukuokak on 2014/10/20.
  */
-public class LeftDrawerItemLickListener implements ListView.OnItemClickListener {
+public class LeftDrawerItemClickListener implements ListView.OnItemClickListener {
 
 
     @Override
