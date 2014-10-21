@@ -64,8 +64,7 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
-    public NavigationDrawerFragment() {
-    }
+    public NavigationDrawerFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,15 +98,6 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-//        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-//                getActionBar().getThemedContext(),
-//                android.R.layout.simple_list_item_activated_1,
-//                android.R.id.text1,
-//                new String[]{
-//                      getString(R.string.title_section1),
-//                        getString(R.string.title_section2),
-//                        getString(R.string.title_section3),
-//                }));
 
         Calendar calendar = Calendar.getInstance();
         ArrayList<CalendarValue> cvArray = setCalendarValueList(calendar);
@@ -141,68 +131,6 @@ public class NavigationDrawerFragment extends Fragment {
         }
         return selectItem;
     }
-//
-//    public String[] setNavigationList() {
-//        Calendar calendar = Calendar.getInstance();
-//        String[] weekdayList = new String[10];
-//        Integer month = calendar.get(Calendar.MONTH) +1 ;
-//        Integer date = calendar.get(Calendar.DATE) ;
-//        Integer loopCount = 7;
-//
-//        weekdayList[0] = getString(R.string.today) + "(" + month.toString() + "/"
-//                + date.toString()+")";
-//        for (int i = 1; i <= loopCount; i++) {
-//            calendar.add(Calendar.DAY_OF_MONTH, 1);
-//            Log.d("setNavigationList", calendar.toString());
-//            weekdayList[i] = getWeekDay(calendar);
-//        }
-//
-//        weekdayList[8] = getString(R.string.analysis);
-//        weekdayList[9] = getString(R.string.stocktaking);
-//
-//        return weekdayList;
-//    }
-//    public String getWeekDay(Calendar weekday) {
-//
-//        Integer month = weekday.get(Calendar.MONTH) +1 ;
-//        Integer date = weekday.get(Calendar.DATE) ;
-//
-//        String today = month.toString() + "/"
-//                + date.toString();
-//
-//        switch (weekday.get(Calendar.DAY_OF_WEEK)) {
-//            case Calendar.SUNDAY:
-//                today = today + "(" + getString(R.string.sun) + ")";
-//                break;
-//
-//            case Calendar.MONDAY:
-//                today = today + "(" + getString(R.string.mon) + ")";
-//                break;
-//
-//            case Calendar.TUESDAY:
-//                today = today + "(" + getString(R.string.tue) + ")";
-//                break;
-//
-//            case Calendar.WEDNESDAY:
-//                today = today + "(" + getString(R.string.wed) + ")";
-//                break;
-//
-//            case Calendar.THURSDAY:
-//                today = today + "(" + getString(R.string.thu) + ")";
-//                break;
-//
-//            case Calendar.FRIDAY:
-//                today = today + "(" + getString(R.string.fri) + ")";
-//                break;
-//
-//            case Calendar.SATURDAY:
-//                today = today + "(" + getString(R.string.sat) + ")";
-//                break;
-//
-//        }
-//
-//        return today;
-//    }
 
 
     public boolean isDrawerOpen() {
@@ -215,7 +143,7 @@ public class NavigationDrawerFragment extends Fragment {
      * @param fragmentId   The android:id of this fragment in its activity's layout.
      * @param drawerLayout The DrawerLayout containing this fragment's UI.
      */
-    public void setUp(int fragmentId, DrawerLayout drawerLayout) {
+    public void setUp(int fragmentId, DrawerLayout drawerLayout ) {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
 

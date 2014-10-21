@@ -4,12 +4,18 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import jp.co.fukuokak.forgetfulperson.model.CalendarValue;
 
 
 public class TopFrameActivity extends Activity
@@ -30,10 +36,11 @@ public class TopFrameActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_frame);
 
+        Intent intent = getIntent();
+
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
-
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
@@ -49,10 +56,35 @@ public class TopFrameActivity extends Activity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
 
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+//        .commit();
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
+        ToDoListFragment fragment = null;
+        android.app.FragmentTransaction ft = null;
+
+        switch(position){
+            case 0:
+                fragment = new ToDoListFragment();
+                ft = fragmentManager.beginTransaction();
+                ft.replace(R.id.container, fragment.newInstance(position));
+                ft.commit();
+                break;
+            case 1:
+                fragment = new ToDoListFragment();
+                ft = fragmentManager.beginTransaction();
+                ft.replace(R.id.container, fragment.newInstance(position));
+                ft.commit();
+                break;
+            default:
+                fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
+                break;
+        }
+
+
     }
 
     public void onSectionAttached(int number) {

@@ -37,9 +37,9 @@ public class LeftDrawerItemClickListener implements ListView.OnItemClickListener
     private void selectItem(int position) {
         Log.v(cvArray.get(position).getListText(), Integer.toString(position));
 
-        activity.setContentView(R.layout.fragment_to_do);
-        TextView tv2 = (TextView) activity.findViewById(R.id.textView2);
-        tv2.setText(cvArray.get(position).getListText());
+//        activity.setContentView(R.layout.fragment_to_do);
+//        TextView tv2 = (TextView) activity.findViewById(R.id.textView2);
+//        tv2.setText(cvArray.get(position).getListText());
         Intent intent = new Intent();
         intent.setClass(activity, TopFrameActivity.class);
         activity.startActivity(intent);

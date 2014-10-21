@@ -48,6 +48,7 @@ public class CalendarValue {
     private String dayNameFlag;
     private String[] week_name = {"", "Sun", "Mon", "Tue", "Wed",
             "Thu", "Fri", "Sat"};
+    static String ARG_EXTRA_KEY_CALENDAR = "calendar";
 
 
     public CalendarValue(Calendar calendar) {
