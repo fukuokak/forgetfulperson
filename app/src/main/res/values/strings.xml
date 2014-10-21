@@ -10,7 +10,7 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
 
-    <!-- Slide Navigation Tiltes & FLAGS -->
+    <!-- Slide Navigation Titles & FLAGS -->
 
     <string name="today">Today</string>
     <string name="mon">Monday</string>
@@ -24,7 +24,7 @@
     <string name="register">Register Instant Task</string>
     <string name="stocktaking">StockTaking Task</string>
 
-    <!-- Screen Tiltes -->
+    <!-- Screen Titles -->
     <string name="today_title">Today Schedules</string>
     <string name="mon_title">Next Monday Schedules</string>
     <string name="tue_title">Next Tuesday Schedules</string>
@@ -37,5 +37,6 @@
     <string name="stocktaking_title">StockTaking Your Today</string>
     <string name="title_activity_tab">TabActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_my_top">MyTopActivity</string>
 
 </resources>
